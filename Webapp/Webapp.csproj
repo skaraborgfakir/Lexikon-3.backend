@@ -4,4 +4,9 @@
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="bootstrap" Version="5.1.0" />
+    <PackageReference Include="jQuery" Version="3.6.0" />
+  </ItemGroup>
+
 </Project>
