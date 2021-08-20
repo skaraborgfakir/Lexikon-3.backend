@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-19 19:51:55 stefan>
+// Time-stamp: <2021-08-20 12:32:42 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-5.0
@@ -53,10 +53,10 @@ namespace Webapp
 	    Console.WriteLine( "Configure: 1");
 	    if (env.IsDevelopment())
 	    {
-		Console.WriteLine( "Configure: 2");
+		Console.WriteLine( "Configure: IsDevelopment");
 		app.UseDeveloperExceptionPage();
 	    } else {
-		Console.WriteLine( "Configure: 3");
+		Console.WriteLine( "Configure: Drift");
 		app.UseExceptionHandler("/Home/Error");
 		app.UseHsts();
 	    }
@@ -64,14 +64,30 @@ namespace Webapp
 	    app.UseHttpsRedirection();
 	    app.UseStaticFiles();
 
+	    //
+	    // aktivera vidarebefordran av frågor till olika kontrollanter
 	    app.UseRouting();
 
+	    //
+	    // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-5.0
+	    //
+	    // beroende av UseRouting()
+	    //
 	    app.UseEndpoints(endpoints =>
 	    {
 		Console.WriteLine( "Configure: 5");
 		endpoints.MapControllerRoute(
 		    name: "default",
-		    pattern: "{controller=Home}/{action=Index}/{id?}");
+		    pattern: "{controller=Home}/{action=Index}/{id?}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
+
+		// A controller with at least three views.
+		//   - About – Containing information about yourself (CV, for example).
+		//   - Contact – Containing your contact information
+		//   - Projects – Containing the GitHub links to your assignments you have finished with small description about them.
+		//
+		endpoints.MapControllerRoute(
+		    name: "github repos",
+		    pattern: "{controller=github}/{action=repos}/");     // 127.0.0.1/{controller=github}/{action=repos}/
 		// endpoints.MapGet("/", async context =>
 		// {
 		//     await context.Response.WriteAsync("Hello World!");
