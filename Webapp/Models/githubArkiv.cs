@@ -1,24 +1,36 @@
-// Time-stamp: <2021-08-23 14:26:41 stefan>
+// Time-stamp: <2021-08-23 17:15:46 stefan>
 
+using System;
 using System.Net;
 using System.IO;
 
 public class githubArkiv {
     public string result;
 
-    public string Result { get => result; }
+    public string Result {
+	get { return result; }
+	private set { result = value; }
+    }
 
     public githubArkiv() {
 	// https://reqbin.com/req/csharp/c-vdhoummp/curl-get-json-example:
-	var url = "https://api.github.com/Skaraborgfakir/repos";
-	var httpRequest = (HttpWebRequest)WebRequest.Create(url);
-	httpRequest.Accept = "application/json";
+	var url = "https://api.github.com/users/Skaraborgfakir/repos";
+	var httpRequest = (HttpWebRequest) WebRequest.Create(url);
 
+	httpRequest.Accept = "application/json";
+	// api.github.com kräver att användaren anger UserAgent, men...
+	httpRequest.UserAgent = "Mosaic3/Kronos executive"; // fungerar det ? Konstig CYBER maskin
+	// det fungerar .... alltså kan man hitta på ganska så fritt.... :-)
+	Console.WriteLine("\nThe HttpHeaders are \n{0}",httpRequest.Headers);
+
+	//
+	// sug ner strukturen
+	//
 	var httpResponse = (HttpWebResponse) httpRequest.GetResponse();
 
 	using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
 	{
-	    result = streamReader.ReadToEnd();
+	    Result = streamReader.ReadToEnd();
 	}
     }
 

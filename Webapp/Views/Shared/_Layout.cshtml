@@ -1,5 +1,11 @@
-<!DOCTYPE html> <!-- Time-stamp: <2021-08-23 15:41:36 stefan> -*-web-*- -->
+<!DOCTYPE html> <!-- Time-stamp: <2021-08-23 16:42:22 stefan> -*-web-*- -->
 <!-- _Layout.cshtml -->
+<!-- inkluderar via RenderBody() de olika fragmenten -->
+<!--     fragment ? Exv: -->
+<!--    Views/_ViewStart.cshtml (ett fragment) innan
+<!--         Views/Hem/OmMig.cshtml (ett annat) -->
+
+
 <html lang="sv">
     <head>
 	<meta charset="utf-8" />
@@ -12,6 +18,7 @@
 	<div>
 	    @RenderBody()
 	</div>
+	<hr/>
 	<footer>
 	    <div>
 		&copy; Stefan Skoglund @DateTime.Now.ToString("D")

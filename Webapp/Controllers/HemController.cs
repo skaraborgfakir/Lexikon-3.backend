@@ -1,4 +1,4 @@
-﻿// Time-stamp: <2021-08-23 13:45:10 stefan>
+﻿// Time-stamp: <2021-08-23 17:01:29 stefan>
 
 // using System;
 // using System.Collections.Generic;
@@ -53,6 +53,9 @@ namespace webapp.Controllers
 	//
 	public IActionResult GitRepos()
 	{
+	    githubArkiv arkivuppgifter = new githubArkiv();
+	    ViewBag.repos = arkivuppgifter.Result;
+
 	    return View("githubRepos");
 	}
 
