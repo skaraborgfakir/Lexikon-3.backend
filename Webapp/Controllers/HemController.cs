@@ -1,4 +1,4 @@
-﻿// Time-stamp: <2021-08-20 14:15:52 stefan>
+﻿// Time-stamp: <2021-08-23 13:45:10 stefan>
 
 // using System;
 // using System.Collections.Generic;
@@ -15,20 +15,50 @@ using webapp.Models;
 
 namespace webapp.Controllers
 {
-    public class HomeController : Controller
+    public class HemController : Controller
     {
-	private readonly ILogger<HomeController> _logger;
+	private readonly ILogger<HemController> _logger;
 
-	public HomeController(ILogger<HomeController> logger)
+	public HemController(ILogger<HemController> logger)
 	{
 	    _logger = logger;
 	}
 
+	//
+	// GET: Hem
+	//
 	public IActionResult Index()
 	{
-	    return View();
+	    return View("Index");
 	}
 
+	//
+	// GET: Kontaktinfo
+	//
+	public IActionResult Kontaktuppgifter()
+	{
+	    return View("Kontaktuppgifter");
+	}
+
+	//
+	// GET: Om mig
+	//
+	public IActionResult OmMig()
+	{
+	    return View("OmMig");
+	}
+
+	//
+	// GET: GitRepos
+	//
+	public IActionResult GitRepos()
+	{
+	    return View("githubRepos");
+	}
+
+	//
+	// GET: persondatasäkerhet
+	//
 	public IActionResult Privacy()
 	{
 	    return View();

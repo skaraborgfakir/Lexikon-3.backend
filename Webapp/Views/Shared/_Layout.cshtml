@@ -1,13 +1,20 @@
-<!-- Time-stamp: <2021-08-20 12:45:19 stefan> -*-web-*- -->
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html> <!-- Time-stamp: <2021-08-23 14:05:40 stefan> -*-web-*- -->
+<html lang="sv">
     <head>
-	<meta name="viewport" content="width=device-width"/>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>@ViewBag.Title</title>
+	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/site.css" />
     </head>
     <body>
 	<div>
 	    @RenderBody()
 	</div>
+	<footer>
+	    <div>
+		&copy; Stefan Skoglund @DateTime.Now.ToString("D")
+	    </div>
+	</footer>
     </body>
 </html>

@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-20 12:32:42 stefan>
+// Time-stamp: <2021-08-22 17:38:39 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-5.0
@@ -43,6 +43,7 @@ namespace Webapp
 	{
 	    services.AddControllersWithViews();
 	    services.AddRazorPages();
+	    services.AddMvc();
 	}
 
 	// This method gets called by the runtime. Use this method to configure the HTTP
@@ -71,23 +72,29 @@ namespace Webapp
 	    //
 	    // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-5.0
 	    //
-	    // beroende av UseRouting()
+	    // beroende av UseRouting() !
+	    //
+	    // mönsterigenkänning:
+	    //   en inkommande URL ska ha ett nominerat styrprogram (Controller)
+	    //   och som option en aktion som eventuellt kan använda ett Id
+	    //
+	    // för varje fördelning ska det finnas ett unikt namn (id)
 	    //
 	    app.UseEndpoints(endpoints =>
 	    {
 		Console.WriteLine( "Configure: 5");
 		endpoints.MapControllerRoute(
 		    name: "default",
-		    pattern: "{controller=Home}/{action=Index}/{id?}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
+		    pattern: "{controller=Hem}/{action=Index}/{id?}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
 
 		// A controller with at least three views.
 		//   - About – Containing information about yourself (CV, for example).
 		//   - Contact – Containing your contact information
 		//   - Projects – Containing the GitHub links to your assignments you have finished with small description about them.
 		//
-		endpoints.MapControllerRoute(
-		    name: "github repos",
-		    pattern: "{controller=github}/{action=repos}/");     // 127.0.0.1/{controller=github}/{action=repos}/
+		// endpoints.MapControllerRoute(
+		//     name: "github repos",
+		//     pattern: "{controller=Hem}/{action=GitHubrepos}/");     // 127.0.0.1/{controller=Hem}/{action=GitHubrepos}/
 		// endpoints.MapGet("/", async context =>
 		// {
 		//     await context.Response.WriteAsync("Hello World!");

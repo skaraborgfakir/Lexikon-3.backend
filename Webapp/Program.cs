@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-19 19:45:35 stefan>
+// Time-stamp: <2021-08-21 12:08:58 stefan>
 
 using System;
 
@@ -13,7 +13,12 @@ namespace Webapp
     {
 	public static void Main(string[] args)
 	{
-	    CreateHostBuilder(args).Build().Run();
+	    // run: interface IHost
+	    // build: interface IHostBuilder - returnerar något som implementerar IHost
+	    // CreateBuilder                 - returnerar något som implementerar IHostBuilder
+	    //
+	    // en gul lök med många skal...
+	    CreateHostBuilder(args:args).Build().Run();
 	}
 
 	public static IHostBuilder CreateHostBuilder(string[] args) =>
