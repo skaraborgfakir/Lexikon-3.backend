@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-24 12:04:00 stefan>
+// Time-stamp: <2021-08-24 14:28:27 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-5.0
@@ -83,25 +83,16 @@ namespace Webapp
 	    app.UseEndpoints(endpoints =>
 	    {
 		Console.WriteLine( "Configure: 5");
+		//
+		// en specifik kontrollant - Doctor med aktör-metod: FeverCheck
+		//
+		// omvänd kontroll - låt dotNet-ramverket kontrollera när något utförs men ange
+		// vilka funktioner som det ska använda.
+		// Funktionerna ska uppfylla vissa krav (som implementeras som Interface)
+		//
 		endpoints.MapControllerRoute(
 		    name: "default",
 		    pattern: "{controller=Doctor}/{action=FeverCheck}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
-		endpoints.MapControllerRoute(
-		    name: "oldhome",
-		    pattern: "{controller=Hem}/{action=Index}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
-
-		// A controller with at least three views.
-		//   - About – Containing information about yourself (CV, for example).
-		//   - Contact – Containing your contact information
-		//   - Projects – Containing the GitHub links to your assignments you have finished with small description about them.
-		//
-		// endpoints.MapControllerRoute(
-		//     name: "github repos",
-		//     pattern: "{controller=Hem}/{action=GitHubrepos}/");     // 127.0.0.1/{controller=Hem}/{action=GitHubrepos}/
-		// endpoints.MapGet("/", async context =>
-		// {
-		//     await context.Response.WriteAsync("Hello World!");
-		// })
 	    });
 	}
     }
