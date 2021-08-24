@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.0" />
+    <PackageReference Include="JQ.NET" Version="1.0.4" />
     <PackageReference Include="jQuery" Version="3.6.0" />
   </ItemGroup>
 
