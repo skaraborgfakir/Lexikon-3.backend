@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-23 15:51:38 stefan>
+// Time-stamp: <2021-08-24 12:04:00 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-5.0
@@ -85,10 +85,10 @@ namespace Webapp
 		Console.WriteLine( "Configure: 5");
 		endpoints.MapControllerRoute(
 		    name: "default",
-		    pattern: "{controller=Hem}/{action=Index}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
+		    pattern: "{controller=Doctor}/{action=FeverCheck}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
 		endpoints.MapControllerRoute(
-		    name: "default",
-		    pattern: "{controller=Hem}/{action=OmMig}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
+		    name: "oldhome",
+		    pattern: "{controller=Hem}/{action=Index}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
 
 		// A controller with at least three views.
 		//   - About – Containing information about yourself (CV, for example).
