@@ -1,8 +1,8 @@
-// Time-stamp: <2021-08-19 12:12:51 stefan>
+// Time-stamp: <2021-08-27 12:07:13 stefan>
 
 using System;
 
-namespace webapp.Models
+namespace Webapp.Modeller
 {
     public class ErrorViewModel
     {
