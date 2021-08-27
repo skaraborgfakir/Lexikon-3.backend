@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-27 11:54:52 stefan>
+// Time-stamp: <2021-08-27 15:46:21 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
@@ -68,7 +68,7 @@ namespace Webapp
 	    } else {
 		Console.WriteLine( "Configure: 2-2 Drift");
 		app.UseExceptionHandler("/Home/Error");
-		app.UseHsts();
+		app.UseHsts();                          /// ställ krav på https - men inte med i Developerversionen, som används
 	    }
 	    // återuppsamling efter gaffel
 	    Console.WriteLine( "Configure: 3");
@@ -95,7 +95,7 @@ namespace Webapp
 	    // för varje fördelning ska det finnas ett unikt namn (id)
 	    //
 	    // UseEndpoints är en utökning av samma type som de tidigare UseStaticFiles (middleware component)
-	    // men den är speciell i att den
+	    // men den är speciell i att den dvs slutdestination
 	    //
 	    app.UseEndpoints( reseslutdestinationer => { Console.WriteLine( "Configure: 5");
 		    // request delegate ?

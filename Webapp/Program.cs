@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-26 13:08:00 stefan>
+// Time-stamp: <2021-08-27 15:42:39 stefan>
 
 using System;
 
@@ -22,8 +22,8 @@ namespace Webapp
 	}
 
 	public static IHostBuilder CreateHostBuilder(string[] args) =>
-	    Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(
-		webBuilder => { foreach (string arg in args) {
+	    Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>
+	    { foreach (string arg in args) {
 			Console.WriteLine( "Program.cs: args" + " " + arg);
 		    }
 		    webBuilder.UseStartup<REVELJ>();
