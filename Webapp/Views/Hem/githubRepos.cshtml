@@ -1,7 +1,8 @@
-﻿<!-- Time-stamp: <2021-08-23 16:40:26 stefan> -*-web-*- -->
+﻿<!-- Time-stamp: <2021-08-27 13:53:02 stefan> -*-web-*- -->
 <!-- githubRepos.cshtml -->
 
-@model githubArkiv
+@using Webapp.Modeller;
+@model Webapp.Modeller.githubArkiv
 
 @{
     ViewData["Title"] = "Olika projekt i github";
@@ -11,8 +12,20 @@
 
 <div>
     De av mina projekt som finns på github.com/Skaraborgfakir
-
 </div>
 <div>
-    repos : @ViewBag.repos
+    <table>
+	<tr>
+	    <th>Namn</th>
+	    <th>URL</th>
+	    <th>Beskrivning</th>
+	</tr>
+	@foreach (Repo item in ViewBag.repos) {
+	    <tr>
+	    <td>@item.Namn</td>
+	    <td>@item.Url</td>
+	    <td> @item.Description</td>
+	    </tr>
+	}
+    </table>
 </div>

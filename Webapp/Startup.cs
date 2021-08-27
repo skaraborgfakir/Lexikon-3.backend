@@ -1,11 +1,11 @@
-// Time-stamp: <2021-08-23 15:51:38 stefan>
+// Time-stamp: <2021-08-27 11:54:52 stefan>
 
 using System;
-// https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-5.0
+// https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
 // using System.Collections.Generic;
-// https://docs.microsoft.com/en-us/dotnet/api/system.linq?view=net-5.0
+// https://docs.microsoft.com/en-us/dotnet/api/system.linq?view=netcore-3.1
 // using System.Linq;
-// https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks?view=net-5.0
+// https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks?view=netcore-3.1
 // using System.Threading.Tasks;
 
 // https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.hosting?view=aspnetcore-3.1
@@ -27,14 +27,18 @@ using Microsoft.Extensions.DependencyInjection; // IServiceCollection
 
 namespace Webapp
 {
-    public class Kickstart
+    // kan egentligen heta vad som helst exv REVELJ !
+    public class REVELJ
     {
-	public Kickstart(IConfiguration configuration)
+	private IConfiguration _configuration;
+	public REVELJ(IConfiguration configuration)
 	{
-	    Configuration = configuration;
+	    _configuration = configuration;
 	}
 
-	public IConfiguration Configuration { get; }
+	public IConfiguration Configuration {
+	    get { return _configuration; }
+	}
 
 	// This method gets called by the runtime. Use this method to add services to the container.
 	// For more information on how to configure your
@@ -51,26 +55,36 @@ namespace Webapp
 	public void Configure( IApplicationBuilder app,
 			       IWebHostEnvironment env)
 	{
+	    //
+	    // klistra in olika funktioner i ramverkets avveckling av jobb (inkommande trafik via http och returnerade svar)
+	    //
 	    Console.WriteLine( "Configure: 1");
+	    //
+	    // gaffling i flödet beroende på programmets startmiljö
 	    if (env.IsDevelopment())
 	    {
-		Console.WriteLine( "Configure: IsDevelopment");
+		Console.WriteLine( "Configure: 2-1 IsDevelopment");
 		app.UseDeveloperExceptionPage();
 	    } else {
-		Console.WriteLine( "Configure: Drift");
+		Console.WriteLine( "Configure: 2-2 Drift");
 		app.UseExceptionHandler("/Home/Error");
 		app.UseHsts();
 	    }
-	    Console.WriteLine( "Configure: 4");
+	    // återuppsamling efter gaffel
+	    Console.WriteLine( "Configure: 3");
 	    app.UseHttpsRedirection();
 	    app.UseStaticFiles();
 
 	    //
 	    // aktivera vidarebefordran av frågor till olika kontrollanter
+	    // MapControllerRoute är beroende
 	    app.UseRouting();
 
 	    //
 	    // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-5.0
+	    //
+	    // avgrening till olika styrprogram (Controller) - ingen egentlig återuppsamling efter dessa
+	    // så inte en egentlig gaffling
 	    //
 	    // beroende av UseRouting() !
 	    //
@@ -80,29 +94,28 @@ namespace Webapp
 	    //
 	    // för varje fördelning ska det finnas ett unikt namn (id)
 	    //
-	    app.UseEndpoints(endpoints =>
-	    {
-		Console.WriteLine( "Configure: 5");
-		endpoints.MapControllerRoute(
-		    name: "default",
-		    pattern: "{controller=Hem}/{action=Index}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
-		endpoints.MapControllerRoute(
-		    name: "default",
-		    pattern: "{controller=Hem}/{action=OmMig}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
+	    // UseEndpoints är en utökning av samma type som de tidigare UseStaticFiles (middleware component)
+	    // men den är speciell i att den
+	    //
+	    app.UseEndpoints( reseslutdestinationer => { Console.WriteLine( "Configure: 5");
+		    // request delegate ?
+		    // in-line middle ware ?
+		    reseslutdestinationer.MapControllerRoute( name:     "normalfall",                       // ingång via /Hem/
+							      pattern:  "/Hem/{action=Index}",
+							      defaults: new { controller="Hem" } );  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
+		    reseslutdestinationer.MapControllerRoute( name:     "ommig",                       // ingång via /Hem/
+							      pattern:  "/OmMig/",
+							      defaults: new { controller="Hem", action="OmMig" } );  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
+		    reseslutdestinationer.MapControllerRoute( name:     "hemmanet",                          // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
+							      pattern:  "{controller=Hem}/{action=Index}");  // är ekvivalent med "/"
 
-		// A controller with at least three views.
-		//   - About – Containing information about yourself (CV, for example).
-		//   - Contact – Containing your contact information
-		//   - Projects – Containing the GitHub links to your assignments you have finished with small description about them.
-		//
-		// endpoints.MapControllerRoute(
-		//     name: "github repos",
-		//     pattern: "{controller=Hem}/{action=GitHubrepos}/");     // 127.0.0.1/{controller=Hem}/{action=GitHubrepos}/
-		// endpoints.MapGet("/", async context =>
-		// {
-		//     await context.Response.WriteAsync("Hello World!");
-		// })
-	    });
+		    // A controller with at least three views.
+		    //   - About – Containing information about yourself (CV, for example).
+		    //   - Contact – Containing your contact information
+		    //   - Projects – Containing the GitHub links to your assignments you have finished with small description about them.
+		    //
+	    }
+	    );
 	}
     }
 }
