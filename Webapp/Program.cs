@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-21 12:08:58 stefan>
+// Time-stamp: <2021-08-24 16:19:55 stefan>
 
 using System;
 
@@ -22,7 +22,7 @@ namespace Webapp
 	}
 
 	public static IHostBuilder CreateHostBuilder(string[] args) =>
-	    Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>
+	    Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>  //  ConfigureWebHostDefaults
 	    {
 		foreach (string arg in args) {
 		    Console.WriteLine( "Program.cs: args" + " " + arg);

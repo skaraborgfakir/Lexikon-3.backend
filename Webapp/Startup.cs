@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-24 14:28:27 stefan>
+// Time-stamp: <2021-08-26 09:23:16 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-5.0
@@ -46,8 +46,8 @@ namespace Webapp
 	    services.AddMvc();
 	}
 
-	// This method gets called by the runtime. Use this method to configure the HTTP
-	// request pipeline.
+	// This method gets called by the runtime.
+	// Use this method to configure the HTTP request pipeline.
 	public void Configure( IApplicationBuilder app,
 			       IWebHostEnvironment env)
 	{
@@ -59,7 +59,7 @@ namespace Webapp
 	    } else {
 		Console.WriteLine( "Configure: Drift");
 		app.UseExceptionHandler("/Home/Error");
-		app.UseHsts();
+		app.UseHsts();                          /// ställ krav på https - men inte med i Developerversionen, som används
 	    }
 	    Console.WriteLine( "Configure: 4");
 	    app.UseHttpsRedirection();
@@ -91,8 +91,13 @@ namespace Webapp
 		// Funktionerna ska uppfylla vissa krav (som implementeras som Interface)
 		//
 		endpoints.MapControllerRoute(
+		    name: "potäter",
+		    pattern: "FeverCheck",
+		    defaults: new { controller="Doctor",
+			action="FeverCheck"} );  // 127.0.0.1/{controller ?}/{action ?}
+		endpoints.MapControllerRoute(
 		    name: "default",
-		    pattern: "{controller=Doctor}/{action=FeverCheck}");  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
+		    pattern: "{controller=Doctor}/{action=FeverCheck}");  // 127.0.0.1/{controller ?}/{action ?}
 	    });
 	}
     }

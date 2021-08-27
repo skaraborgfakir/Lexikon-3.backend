@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-24 11:04:57 stefan>
+// Time-stamp: <2021-08-24 18:59:13 stefan>
 
 // using System;
 // using System.Collections.Generic;
@@ -19,6 +19,9 @@ namespace webapp.Controllers
     {
 	public IActionResult FeverCheck () {
 	    return View("FeverCheck");
+	}
+	public IActionResult Index () {
+	    return Redirect( "FeverCheck");
 	}
     }
 }
