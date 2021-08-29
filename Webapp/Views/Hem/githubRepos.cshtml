@@ -1,4 +1,4 @@
-﻿<!-- Time-stamp: <2021-08-27 13:53:02 stefan> -*-web-*- -->
+﻿<!-- Time-stamp: <2021-08-30 01:49:54 stefan> -*-web-*- -->
 <!-- githubRepos.cshtml -->
 
 @using Webapp.Modeller;
@@ -16,15 +16,17 @@
 <div>
     <table>
 	<tr>
-	    <th>Namn</th>
+	    <th>Name</th>
+	    <th>Full_Name</th>
 	    <th>URL</th>
 	    <th>Beskrivning</th>
 	</tr>
 	@foreach (Repo item in ViewBag.repos) {
 	    <tr>
-	    <td>@item.Namn</td>
-	    <td>@item.Url</td>
-	    <td> @item.Description</td>
+	    <td>@item.Name</td>
+	    <td>@item.Full_Name</td>
+	    <td>@item.Html_Url</td>
+	    <td>@item.Description</td>
 	    </tr>
 	}
     </table>
