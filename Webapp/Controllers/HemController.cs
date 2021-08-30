@@ -1,6 +1,6 @@
-﻿// Time-stamp: <2021-08-30 21:00:15 stefan>
+﻿// Time-stamp: <2021-08-30 21:11:46 stefan>
 
-// using System;
+using System;
 // using System.Collections.Generic;
 using System.Diagnostics;
 // using System.Linq;
@@ -37,6 +37,8 @@ namespace Webapp.Controllers
 	//
 	public IActionResult Index()
 	{
+	    Console.WriteLine( "Index: return view index");
+
 	    return View("Index");
 	    // return ControllerContext.MyDisplayRouteInfo();
 	}
@@ -46,6 +48,8 @@ namespace Webapp.Controllers
 	//
 	public IActionResult Kontaktuppgifter()
 	{
+	    Console.WriteLine( "Kontaktuppgifter: return view Kontaktuppgifter");
+
 	    return View("Kontaktuppgifter");
 	}
 
@@ -54,6 +58,8 @@ namespace Webapp.Controllers
 	//
 	public IActionResult OmMig()
 	{
+	    Console.WriteLine( "OmMig: return view OmMig");
+
 	    ViewData["hemort"]= "Stenstorp";
 	    return View("OmMig");
 	}
@@ -63,6 +69,7 @@ namespace Webapp.Controllers
 	//
 	public IActionResult GitRepos()
 	{
+	    Console.WriteLine( "GitRepos: return view githubrepos");
 	    githubArkiv arkivuppgifter = new githubArkiv();
 	    ViewBag.repos = arkivuppgifter.samtligaArkiv;
 
@@ -74,6 +81,8 @@ namespace Webapp.Controllers
 	//
 	public IActionResult Projects()
 	{
+	    Console.WriteLine( "Projects: return view githubrepos");
+
 	    githubArkiv arkivuppgifter = new githubArkiv();
 	    ViewBag.repos = arkivuppgifter.samtligaArkiv;
 
@@ -85,12 +94,16 @@ namespace Webapp.Controllers
 	//
 	public IActionResult Privacy()
 	{
+	    Console.WriteLine( "Privacy: return view");
+
 	    return View();
 	}
 
 	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 	public IActionResult Error()
 	{
+	    Console.WriteLine( "Error: return view(new ErrorVi...");
+
 	    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 	}
     }
