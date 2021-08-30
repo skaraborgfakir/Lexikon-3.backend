@@ -1,4 +1,4 @@
-﻿// Time-stamp: <2021-08-27 16:08:23 stefan>
+﻿// Time-stamp: <2021-08-30 21:38:22 stefan>
 
 // using System;
 // using System.Collections.Generic;
@@ -24,11 +24,44 @@ namespace Webapp.Controllers
 	    _logger = logger;
 	}
 
+	//
+	// GET: Hem
+	//
 	public IActionResult Index()
 	{
-	    return View();
+	    return View("Index");
 	}
 
+	//
+	// GET: Kontaktinfo
+	//
+	public IActionResult Kontaktuppgifter()
+	{
+	    return View("Kontaktuppgifter");
+	}
+
+	//
+	// GET: Om mig
+	//
+	public IActionResult AboutMe()
+	{
+	    return View("AboutMe");
+	}
+
+	//
+	// GET: GitRepos
+	//
+	public IActionResult GitRepos()
+	{
+	    githubArkiv arkivuppgifter = new githubArkiv();
+	    ViewBag.repos = arkivuppgifter.Result;
+
+	    return View("githubRepos");
+	}
+
+	//
+	// GET: persondatasäkerhet
+	//
 	public IActionResult Privacy()
 	{
 	    return View();

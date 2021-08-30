@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-30 21:27:30 stefan>
+// Time-stamp: <2021-08-30 21:37:07 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
@@ -108,9 +108,9 @@ namespace Webapp
 		//
 
 		// vilka mönster (pattern) kommer att passa vilka url ?
-		//          /Hem/   /Hem/{vad som helst}   /OmMig/   /    /FeverCheck   /Hem/FeverCheck
-		// fall 1    N          N                    N       N        J            N
-		// fall 2    J          J                    J       J        J            J
+		//          /Home/   /Home/{vad som helst}   /AboutMe/   /    /FeverCheck   /Home/FeverCheck
+		// fall 1    N          N                        N       N        J            N
+		// fall 2    J          J                        J       J        J            J
 		//
 		//
 		// en specifik kontrollant - Doctor med aktör-metod: FeverCheck
@@ -127,7 +127,7 @@ namespace Webapp
 						 action="FeverCheck"} );  // 127.0.0.1/FeverCheck
 		endpoints.MapControllerRoute(
 		    name:    "normalfall",
-		    pattern: "{controller=Hem}/{action=Index}");  // 127.0.0.1/{controller ?}/{action ?}
+		    pattern: "{controller=Home}/{action=Index}");  // 127.0.0.1/{controller ?}/{action ?}
 	    });
 	}
     }
