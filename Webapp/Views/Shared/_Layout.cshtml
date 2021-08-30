@@ -1,9 +1,14 @@
-<!DOCTYPE html> <!-- Time-stamp: <2021-08-24 10:02:46 stefan> -*-web-*- -->
+<!DOCTYPE html> <!-- Time-stamp: <2021-08-30 12:37:17 stefan> -*-web-*- -->
 <!-- _Layout.cshtml -->
 <!-- inkluderar via RenderBody() de olika fragmenten -->
 <!--     fragment ? Exv: -->
 <!--    Views/_ViewStart.cshtml (ett fragment) innan
 <!--         Views/Hem/OmMig.cshtml (ett annat) -->
+
+<!-- https://dotnettutorials.net/lesson/asp-net-core-appsettings-json-file/ -->
+<!-- https://stackoverflow.com/questions/47296541/access-configuration-from-a-view-in-asp-net-core/47297327 -->
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
 
 
 <html lang="sv">
@@ -28,12 +33,6 @@
 			    <li class="nav-item">
 				<a class="nav-link text-dark" href="/Hem/OmMig">Lite grann om mig själv</a>
 			    </li>
-			    <li class="nav-item">
-				<a class="nav-link text-dark" href="/Hem/Kontaktuppgifter">Kontaktuppgifter</a>
-			    </li>
-			    <li class="nav-item">
-				<a class="nav-link text-dark" href="/Hem/GitRepos">Några projekt i github</a>
-			    </li>
 			</ul>
 		    </div>
 		</div>
@@ -45,6 +44,11 @@
 	<footer>
 	    <div>
 		&copy; Stefan Skoglund @DateTime.Now.ToString("D")
+	    </div>
+	    <div>
+		<!-- https://dotnettutorials.net/lesson/asp-net-core-appsettings-json-file/ -->
+		<!-- https://stackoverflow.com/questions/47296541/access-configuration-from-a-view-in-asp-net-core/47297327 -->
+		via appsettings*.json @Configuration["app_run_miljö"]
 	    </div>
 	</footer>
     </body>

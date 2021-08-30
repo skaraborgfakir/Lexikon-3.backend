@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-24 16:19:55 stefan>
+// Time-stamp: <2021-08-27 15:42:40 stefan>
 
 using System;
 
@@ -27,8 +27,7 @@ namespace Webapp
 		foreach (string arg in args) {
 		    Console.WriteLine( "Program.cs: args" + " " + arg);
 		}
-
-		webBuilder.UseStartup<Kickstart>();
+		webBuilder.UseStartup<REVELJ>();
 	    });
     }
 }

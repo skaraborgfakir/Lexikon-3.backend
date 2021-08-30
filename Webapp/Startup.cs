@@ -1,11 +1,11 @@
-// Time-stamp: <2021-08-26 09:23:16 stefan>
+// Time-stamp: <2021-08-30 21:27:30 stefan>
 
 using System;
-// https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=net-5.0
+// https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
 // using System.Collections.Generic;
-// https://docs.microsoft.com/en-us/dotnet/api/system.linq?view=net-5.0
+// https://docs.microsoft.com/en-us/dotnet/api/system.linq?view=netcore-3.1
 // using System.Linq;
-// https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks?view=net-5.0
+// https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks?view=netcore-3.1
 // using System.Threading.Tasks;
 
 // https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.hosting?view=aspnetcore-3.1
@@ -27,14 +27,18 @@ using Microsoft.Extensions.DependencyInjection; // IServiceCollection
 
 namespace Webapp
 {
-    public class Kickstart
+    // kan egentligen heta vad som helst exv REVELJ !
+    public class REVELJ
     {
-	public Kickstart(IConfiguration configuration)
+	private IConfiguration _configuration;
+	public REVELJ(IConfiguration configuration)
 	{
-	    Configuration = configuration;
+	    _configuration = configuration;
 	}
 
-	public IConfiguration Configuration { get; }
+	public IConfiguration Configuration {
+	    get { return _configuration; }
+	}
 
 	// This method gets called by the runtime. Use this method to add services to the container.
 	// For more information on how to configure your
@@ -46,31 +50,42 @@ namespace Webapp
 	    services.AddMvc();
 	}
 
-	// This method gets called by the runtime.
-	// Use this method to configure the HTTP request pipeline.
+	// This method gets called by the runtime. Use this method to configure the HTTP
+	// request pipeline.
 	public void Configure( IApplicationBuilder app,
 			       IWebHostEnvironment env)
 	{
+	    //
+	    // klistra in olika funktioner i ramverkets avveckling av jobb (inkommande trafik via http och returnerade svar)
+	    //
 	    Console.WriteLine( "Configure: 1");
+	    //
+	    // gaffling i flödet beroende på programmets startmiljö
 	    if (env.IsDevelopment())
 	    {
-		Console.WriteLine( "Configure: IsDevelopment");
+		Console.WriteLine( "Configure: 2-1 IsDevelopment");
 		app.UseDeveloperExceptionPage();
 	    } else {
-		Console.WriteLine( "Configure: Drift");
+		Console.WriteLine( "Configure: 2-2 Drift");
 		app.UseExceptionHandler("/Home/Error");
 		app.UseHsts();                          /// ställ krav på https - men inte med i Developerversionen, som används
 	    }
-	    Console.WriteLine( "Configure: 4");
+	    // återuppsamling efter gaffel
+	    Console.WriteLine( "Configure: 3");
 	    app.UseHttpsRedirection();
+	    app.UseStatusCodePages();
 	    app.UseStaticFiles();
 
 	    //
 	    // aktivera vidarebefordran av frågor till olika kontrollanter
+	    // MapControllerRoute är beroende
 	    app.UseRouting();
 
 	    //
 	    // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-5.0
+	    //
+	    // avgrening till olika styrprogram (Controller) - ingen egentlig återuppsamling efter dessa
+	    // så inte en egentlig gaffling
 	    //
 	    // beroende av UseRouting() !
 	    //
@@ -80,9 +95,23 @@ namespace Webapp
 	    //
 	    // för varje fördelning ska det finnas ett unikt namn (id)
 	    //
+	    // UseEndpoints är en utökning av samma typ som de tidigare UseStaticFiles (middleware component)
+	    // men den är speciell i att den är final dvs slutdestination
+	    //
 	    app.UseEndpoints(endpoints =>
 	    {
 		Console.WriteLine( "Configure: 5");
+		// A controller with at least three views.
+		//   - About – Containing information about yourself (CV, for example).
+		//   - Contact – Containing your contact information
+		//   - Projects – Containing the GitHub links to your assignments you have finished with small description about them.
+		//
+
+		// vilka mönster (pattern) kommer att passa vilka url ?
+		//          /Hem/   /Hem/{vad som helst}   /OmMig/   /    /FeverCheck   /Hem/FeverCheck
+		// fall 1    N          N                    N       N        J            N
+		// fall 2    J          J                    J       J        J            J
+		//
 		//
 		// en specifik kontrollant - Doctor med aktör-metod: FeverCheck
 		//
@@ -91,13 +120,14 @@ namespace Webapp
 		// Funktionerna ska uppfylla vissa krav (som implementeras som Interface)
 		//
 		endpoints.MapControllerRoute(
-		    name: "potäter",
+		    name: "drboström",
 		    pattern: "FeverCheck",
-		    defaults: new { controller="Doctor",
-			action="FeverCheck"} );  // 127.0.0.1/{controller ?}/{action ?}
+		    defaults: new {
+						 controller="Doctor",
+						 action="FeverCheck"} );  // 127.0.0.1/FeverCheck
 		endpoints.MapControllerRoute(
-		    name: "default",
-		    pattern: "{controller=Doctor}/{action=FeverCheck}");  // 127.0.0.1/{controller ?}/{action ?}
+		    name:    "normalfall",
+		    pattern: "{controller=Hem}/{action=Index}");  // 127.0.0.1/{controller ?}/{action ?}
 	    });
 	}
     }
