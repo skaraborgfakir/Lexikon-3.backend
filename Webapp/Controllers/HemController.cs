@@ -1,4 +1,4 @@
-﻿// Time-stamp: <2021-08-30 12:17:11 stefan>
+﻿// Time-stamp: <2021-08-30 21:00:15 stefan>
 
 // using System;
 // using System.Collections.Generic;
@@ -13,8 +13,16 @@ using Microsoft.Extensions.Logging;
 
 using Webapp.Modeller;
 
+using Microsoft.Docs.Samples;
+
 namespace Webapp.Controllers
 {
+    // A controller with at least three views.
+    //   - About – Containing information about yourself (CV, for example).
+    //   - Contact – Containing your contact information
+    //   - Projects – Containing the GitHub links to your assignments you have finished with small description about them.
+    //
+
     public class HemController : Controller
     {
 	private readonly ILogger<HemController> _logger;
@@ -30,6 +38,7 @@ namespace Webapp.Controllers
 	public IActionResult Index()
 	{
 	    return View("Index");
+	    // return ControllerContext.MyDisplayRouteInfo();
 	}
 
 	//
@@ -53,6 +62,17 @@ namespace Webapp.Controllers
 	// GET: GitRepos
 	//
 	public IActionResult GitRepos()
+	{
+	    githubArkiv arkivuppgifter = new githubArkiv();
+	    ViewBag.repos = arkivuppgifter.samtligaArkiv;
+
+	    return View("githubRepos");
+	}
+
+	//
+	// GET: GitRepos
+	//
+	public IActionResult Projects()
 	{
 	    githubArkiv arkivuppgifter = new githubArkiv();
 	    ViewBag.repos = arkivuppgifter.samtligaArkiv;

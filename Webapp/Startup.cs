@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-27 15:46:21 stefan>
+// Time-stamp: <2021-08-30 21:00:04 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
@@ -98,22 +98,29 @@ namespace Webapp
 	    // men den är speciell i att den dvs slutdestination
 	    //
 	    app.UseEndpoints( reseslutdestinationer => { Console.WriteLine( "Configure: 5");
-		    // request delegate ?
-		    // in-line middle ware ?
-		    reseslutdestinationer.MapControllerRoute( name:     "normalfall",                       // ingång via /Hem/
-							      pattern:  "/Hem/{action=Index}",
-							      defaults: new { controller="Hem" } );  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
-		    reseslutdestinationer.MapControllerRoute( name:     "ommig",                       // ingång via /Hem/
-							      pattern:  "/OmMig/",
-							      defaults: new { controller="Hem", action="OmMig" } );  // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
-		    reseslutdestinationer.MapControllerRoute( name:     "hemmanet",                          // 127.0.0.1/{controller ?}/{action ?}/{Id ?}
-							      pattern:  "{controller=Hem}/{action=Index}");  // är ekvivalent med "/"
-
 		    // A controller with at least three views.
 		    //   - About – Containing information about yourself (CV, for example).
 		    //   - Contact – Containing your contact information
 		    //   - Projects – Containing the GitHub links to your assignments you have finished with small description about them.
 		    //
+
+		    // vilka mönster (pattern) kommer att passa vilka url ?
+		    //          /Hem/   /Hem/{vad som helst}   /OmMig/   /
+		    // fall 1    J          J                    N       N
+		    // fall 2    N          N                    J       N
+		    // fall 3    J          J                    N       J
+		    //
+		    reseslutdestinationer.MapControllerRoute( name:     "normalfall",
+							      pattern:  "/Hem/{action=Index}",
+							      defaults: new { controller="Hem" } );
+		    reseslutdestinationer.MapControllerRoute( name:     "ommig",
+							      pattern:  "/OmMig/",
+							      defaults: new {
+								  controller="Hem",
+								  action="OmMig" } );
+		    reseslutdestinationer.MapControllerRoute( name:     "hemmanet",
+							      pattern:  "{controller=Hem}/{action=Index}");
+
 	    }
 	    );
 	}
