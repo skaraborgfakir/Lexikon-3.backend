@@ -1,4 +1,4 @@
-﻿// Time-stamp: <2021-08-27 13:26:36 stefan>
+﻿// Time-stamp: <2021-08-30 12:17:11 stefan>
 
 // using System;
 // using System.Collections.Generic;
@@ -45,6 +45,7 @@ namespace Webapp.Controllers
 	//
 	public IActionResult OmMig()
 	{
+	    ViewData["hemort"]= "Stenstorp";
 	    return View("OmMig");
 	}
 
