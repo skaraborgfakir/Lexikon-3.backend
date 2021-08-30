@@ -1,4 +1,4 @@
-﻿// Time-stamp: <2021-08-30 21:11:46 stefan>
+﻿// Time-stamp: <2021-08-30 22:45:18 stefan>
 
 using System;
 // using System.Collections.Generic;
@@ -87,6 +87,7 @@ namespace Webapp.Controllers
 	    ViewBag.repos = arkivuppgifter.samtligaArkiv;
 
 	    return View("githubRepos");
+	    // return View(arkivuppgifter);
 	}
 
 	//

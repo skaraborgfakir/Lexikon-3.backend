@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-30 21:00:04 stefan>
+// Time-stamp: <2021-08-30 21:24:30 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
@@ -94,8 +94,8 @@ namespace Webapp
 	    //
 	    // för varje fördelning ska det finnas ett unikt namn (id)
 	    //
-	    // UseEndpoints är en utökning av samma type som de tidigare UseStaticFiles (middleware component)
-	    // men den är speciell i att den dvs slutdestination
+	    // UseEndpoints är en utökning av samma typ som de tidigare UseStaticFiles (middleware component)
+	    // men den är speciell i att den är final dvs slutdestination
 	    //
 	    app.UseEndpoints( reseslutdestinationer => { Console.WriteLine( "Configure: 5");
 		    // A controller with at least three views.
