@@ -1,4 +1,4 @@
-﻿// Time-stamp: <2021-08-30 22:45:18 stefan>
+﻿// Time-stamp: <2021-08-30 22:58:21 stefan>
 
 using System;
 // using System.Collections.Generic;
@@ -70,10 +70,11 @@ namespace Webapp.Controllers
 	public IActionResult GitRepos()
 	{
 	    Console.WriteLine( "GitRepos: return view githubrepos");
-	    githubArkiv arkivuppgifter = new githubArkiv();
-	    ViewBag.repos = arkivuppgifter.samtligaArkiv;
+	    githubArkiv arkivuppgifter = new GitRepos();
+	    // ViewBag.repos = arkivuppgifter.samtligaArkiv;
 
-	    return View("githubRepos");
+	    // return View("githubRepos");
+	    return View(arkivuppgifter);
 	}
 
 	//
@@ -84,10 +85,10 @@ namespace Webapp.Controllers
 	    Console.WriteLine( "Projects: return view githubrepos");
 
 	    githubArkiv arkivuppgifter = new githubArkiv();
-	    ViewBag.repos = arkivuppgifter.samtligaArkiv;
+	    //    ViewBag.repos = arkivuppgifter.samtligaArkiv;
 
-	    return View("githubRepos");
-	    // return View(arkivuppgifter);
+	    // return View("githubRepos");
+	    return View(arkivuppgifter);
 	}
 
 	//
