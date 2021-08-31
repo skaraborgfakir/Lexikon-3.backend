@@ -63,6 +63,28 @@ namespace Webapp.Controllers
 	}
 
 	//
+	// GET:
+	//
+	[HttpGet]
+	public IActionResult Game()
+	{
+	    Console.WriteLine( "Game: Get: return View(Game)3");
+
+	    return View("Game");
+	}
+
+	//
+	// POST
+	//
+	[HttpPost]
+	public IActionResult Game(int gissning)
+	{
+	    Console.WriteLine( "Game: Post: return View(Game)3");
+
+	    return View("Game");
+	}
+
+	//
 	// GET: persondatasäkerhet
 	//
 	public IActionResult Privacy()

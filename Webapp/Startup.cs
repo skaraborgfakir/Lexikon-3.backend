@@ -126,6 +126,13 @@ namespace Webapp
 						 controller="Doctor",
 						 action="FeverCheck"} );  // 127.0.0.1/FeverCheck
 		endpoints.MapControllerRoute(
+		    name:    "gissa ett tal-spel",
+		    pattern: "GuessingGame",
+		    defaults: new {
+						 controller="Home",
+						 action="Game"
+					     });
+		endpoints.MapControllerRoute(
 		    name:    "normalfall",
 		    pattern: "{controller=Home}/{action=Index}");  // 127.0.0.1/{controller ?}/{action ?}
 	    });
