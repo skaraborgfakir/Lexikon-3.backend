@@ -1,4 +1,4 @@
-﻿// Time-stamp: <2021-08-30 21:53:38 stefan>
+﻿// Time-stamp: <2021-08-31 11:46:44 stefan>
 
 using System;
 // using System.Collections.Generic;
@@ -73,6 +73,8 @@ namespace Webapp.Controllers
 	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 	public IActionResult Error()
 	{
+	    Console.WriteLine( "Error: return view(new ErrorViewModel");
+
 	    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 	}
     }
