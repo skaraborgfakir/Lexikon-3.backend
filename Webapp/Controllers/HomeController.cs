@@ -1,6 +1,6 @@
-﻿// Time-stamp: <2021-08-30 21:38:22 stefan>
+﻿// Time-stamp: <2021-08-30 21:53:38 stefan>
 
-// using System;
+using System;
 // using System.Collections.Generic;
 using System.Diagnostics;
 // using System.Linq;
@@ -37,15 +37,18 @@ namespace Webapp.Controllers
 	//
 	public IActionResult Kontaktuppgifter()
 	{
-	    return View("Kontaktuppgifter");
+	    return View("Contact");
 	}
 
 	//
 	// GET: Om mig
 	//
-	public IActionResult AboutMe()
+	public IActionResult About()
 	{
-	    return View("AboutMe");
+	    Console.WriteLine( "AboutMe: return view About");
+	    ViewData["hemort"]= "Stenstorp";
+
+	    return View("About");
 	}
 
 	//
