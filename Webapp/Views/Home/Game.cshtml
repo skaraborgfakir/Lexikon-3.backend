@@ -1,6 +1,8 @@
 ﻿<!-- Time-stamp: <2021-08-31 11:59:19 stefan> -*-web-*- -->
 <!-- githubRepos.cshtml -->
 
+@using Webapp.Viewmodel
+
 @model Game
 
 @{
@@ -12,3 +14,8 @@
 <div>
     Gissa ett tal mellan 1-100
 </div>
+
+<form asp-controller="Home" asp-action="Game" method="post">
+    <label for="gissning">Gissa på ett tal:</label><input asp-for="Talgissning"/><br/>
+    <button type="submit">Inmatning</button>
+</form>

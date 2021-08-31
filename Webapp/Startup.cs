@@ -45,6 +45,14 @@ namespace Webapp
 	// application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 	public void ConfigureServices(IServiceCollection services)
 	{
+	    services.AddDistributedMemoryCache();
+	    services.AddSession( options => {
+		options.IdleTimeout = TimeSpan.FromSeconds(30);
+		options.Cookie.CookieName = "netcore.fakirenstenstorp.st";
+		options.Cookie.HttpOnly = true;
+		options.Cookie.IsEssential = true;
+	    }
+	    );
 	    services.AddControllersWithViews();
 	    services.AddRazorPages();
 	    services.AddMvc();
@@ -80,6 +88,10 @@ namespace Webapp
 	    // aktivera vidarebefordran av frågor till olika kontrollanter
 	    // MapControllerRoute är beroende
 	    app.UseRouting();
+
+
+	    //
+	    app.UseSession();
 
 	    //
 	    // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-5.0

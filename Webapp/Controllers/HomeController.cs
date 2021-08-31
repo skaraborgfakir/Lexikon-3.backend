@@ -65,10 +65,12 @@ namespace Webapp.Controllers
 	//
 	// GET:
 	//
+	// https://www.infoworld.com/article/3600190/how-to-overload-action-methods-in-aspnet-core-mvc-5.html
+	//
 	[HttpGet]
 	public IActionResult Game()
 	{
-	    Console.WriteLine( "Game: Get: return View(Game)3");
+	    Console.WriteLine( "Game: Get: return View(Game)");
 
 	    return View("Game");
 	}
@@ -76,10 +78,12 @@ namespace Webapp.Controllers
 	//
 	// POST
 	//
+	// https://www.infoworld.com/article/3600190/how-to-overload-action-methods-in-aspnet-core-mvc-5.html
+	//
 	[HttpPost]
 	public IActionResult Game(int gissning)
 	{
-	    Console.WriteLine( "Game: Post: return View(Game)3");
+	    Console.WriteLine( "Game: Post: return View(Game)");
 
 	    return View("Game");
 	}
