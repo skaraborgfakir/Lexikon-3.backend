@@ -1,11 +1,11 @@
+// Time-stamp: <2021-08-31 11:53:17 stefan>
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+// https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.hosting?view=aspnetcore-3.1
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+// https://docs.microsoft.com/en-us/dotnet/api/microsoft.extensions.hosting?view=dotnet-plat-ext-3.1
+using Microsoft.Extensions.Hosting; // IHostBuilder
 
 namespace Webapp
 {
@@ -13,14 +13,21 @@ namespace Webapp
     {
 	public static void Main(string[] args)
 	{
-	    CreateHostBuilder(args).Build().Run();
+	    // run: interface IHost
+	    // build: interface IHostBuilder - returnerar något som implementerar IHost
+	    // CreateBuilder                 - returnerar något som implementerar IHostBuilder
+	    //
+	    // en gul lök med många skal...
+	    CreateHostBuilder(args:args).Build().Run();
 	}
 
 	public static IHostBuilder CreateHostBuilder(string[] args) =>
-	    Host.CreateDefaultBuilder(args)
-		.ConfigureWebHostDefaults(webBuilder =>
-		{
-		    webBuilder.UseStartup<Startup>();
-		});
+	    Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>  //  ConfigureWebHostDefaults
+	    {
+		foreach (string arg in args) {
+		    Console.WriteLine( "Program.cs: args" + " " + arg);
+		}
+		webBuilder.UseStartup<REVELJ>();
+	    });
     }
 }

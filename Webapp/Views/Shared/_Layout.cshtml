@@ -1,0 +1,58 @@
+<!DOCTYPE html> <!-- Time-stamp: <2021-08-30 21:57:34 stefan> -*-web-*- -->
+<!-- _Layout.cshtml -->
+<!-- inkluderar via RenderBody() de olika fragmenten -->
+<!--     fragment ? Exv: -->
+<!--    Views/_ViewStart.cshtml (ett fragment) innan
+<!--         Views/Hem/OmMig.cshtml (ett annat) -->
+
+<!-- https://dotnettutorials.net/lesson/asp-net-core-appsettings-json-file/ -->
+<!-- https://stackoverflow.com/questions/47296541/access-configuration-from-a-view-in-asp-net-core/47297327 -->
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+
+<html lang="sv">
+    <head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewBag.Title</title>
+	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/site.css" />
+    </head>
+    <body>
+	<header>
+	    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+		<div class="container">
+		    <a class="navbar-brand" asp-area="" asp-page="/Home/Index">Hem</a>
+		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+			    aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		    </button>
+		    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+			<ul class="navbar-nav flex-grow-1">
+			    <li class="nav-item">
+				<a class="nav-link text-dark" href="/Home/About">Lite grann om mig själv</a>
+			    </li>
+			    <li class="nav-item">
+				<a class="nav-link text-dark" href="/Doctor/FeverCheck">Dr Boströms mottagning</a>
+			    </li>
+			</ul>
+		    </div>
+		</div>
+	</header>
+	<div>
+	    @RenderBody()
+	</div>
+	<hr/>
+	<footer>
+	    <div>
+		&copy; Stefan Skoglund @DateTime.Now.ToString("D")
+	    </div>
+	    <div>
+		<!-- https://dotnettutorials.net/lesson/asp-net-core-appsettings-json-file/ -->
+		<!-- https://stackoverflow.com/questions/47296541/access-configuration-from-a-view-in-asp-net-core/47297327 -->
+		via appsettings*.json @Configuration["app_run_miljö"]
+	    </div>
+	</footer>
+    </body>
+</html>

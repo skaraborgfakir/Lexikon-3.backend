@@ -1,0 +1,29 @@
+\documentclass[a4paper]{article}
+\usepackage{pgf-umlsd}
+
+\begin{document}
+\begin{figure}
+  \centering
+  \begin{sequencediagram}
+    \newthread{A}{\parbox[c]{1.5cm}{\centering Kestrel httpd}}{}
+    \newinst{B}{\parbox[c]{1.5cm}{\centering Https omdirigering}}{}
+    \newinst{B1}{Komprimering}{}
+    \newinst{C}{\parbox[c]{1.5cm}{\centering Statiska filer}}{}
+    \newinst{D}{Trafikdirigering}{}
+    \newinst{E}{Doktorn}{}
+    \begin{call}{A}{GET}{B}{}
+      \begin{call}{B}{GET}{B1}{}
+        \begin{call}{B1}{GET}{C}{}
+          \begin{call}{C}{GET}{D}{}
+            \begin{call}{D}{GET}{E}{}
+            \end{call}
+          \end{call}
+        \end{call}
+      \end{call}
+    \end{call}
+
+  \end{sequencediagram}
+  \caption{doktor boström}
+  \label{fig:dr_bostrom}
+\end{figure}
+\end{document}
