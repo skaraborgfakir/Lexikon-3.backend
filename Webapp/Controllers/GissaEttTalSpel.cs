@@ -1,4 +1,4 @@
-// Time-stamp: <2021-09-02 09:26:37 stefan>
+// Time-stamp: <2021-09-02 15:04:12 stefan>
 
 using System;
 // using System.Collections.Generic;
@@ -26,8 +26,6 @@ using Webapp.Hjälpklasser;
 namespace Webapp.Controllers
 {
     public class GissaEttTalSpel : Controller {
-	private static Dictionary<string, GissaEttTalSpelModell> uteståendeSpel = new Dictionary<string, GissaEttTalSpelModell>();
-
 	public GissaEttTalSpel() {
 	}
 
@@ -44,18 +42,24 @@ namespace Webapp.Controllers
 	    int slumpadSessionID = Slumptalskälla.tal( 1, 500000000);
 
 	    GissaEttTalSpelModell enSpelomgång = new GissaEttTalSpelModell();
-	    uteståendeSpel.Add( slumpadSessionID.ToString(), enSpelomgång);
-
-	    HttpContext.Session.SetString( "test_slumptal", enSpelomgång.EttSlumpTal.ToString());
-	    Console.WriteLine( "uteståendeSpel.Count.ToString : " + uteståendeSpel.Count.ToString());
-
-	    GissaEttTalSpelVyModell spelbrädan = new GissaEttTalSpelVyModell();
-	    spelbrädan.AntalNuvarandeGissningar = enSpelomgång.AntalGissningar; // kommer iofs alltid att vara ==0
+	    HttpContext.Session.SetString( "test_slumptal", enSpelomgång.Hemligheten.ToString());
 
 	    CookieOptions cookieOptions = new CookieOptions();
 	    cookieOptions.Domain = "127.0.0.1";
 
 	    HttpContext.Response.Cookies.Append( ".fakirenstenstorp.st", slumpadSessionID.ToString(), cookieOptions);
+
+	    GissaEttTalSpelVyModell spelbrädan = new GissaEttTalSpelVyModell();
+	    spelbrädan.AntalNuvarandeGissningar = enSpelomgång.AntalGissningar;
+	    spelbrädan.Hemligheten = enSpelomgång.Hemligheten;
+
+	    //
+	    // alternativ för att få över data till vy:n (../Views/GissaEttTalSpel/Spela.cshtml)
+	    //
+	    // ViewData - grunden
+	    // ViewBag  - ViewData i en annan tappning
+	    // ViewModel -
+	    //
 
 	    return View(spelbrädan);
 	}
@@ -68,43 +72,26 @@ namespace Webapp.Controllers
 	[HttpPost]
 	public IActionResult Spela(GissaEttTalSpelVyModell spelbrädan)
 	{
-	    var requestLen = Request.ContentLength;
-	    Console.WriteLine( "Game: POST: requestLen.ToString " + requestLen.ToString());
-	    Console.WriteLine( "Game: POST: spelbrädan.Talgissning " + spelbrädan.Talgissning.ToString());
+	    GissaEttTalSpelModell enSpelomgång = new GissaEttTalSpelModell( spelbrädan.Hemligheten,
+									    spelbrädan.AntalNuvarandeGissningar);
 
-	    Console.WriteLine( "uteståendeSpel.Count.ToString : " + uteståendeSpel.Count.ToString());
+	    if (enSpelomgång.Gissning(spelbrädan.Talgissning)) {
+		//
+		// det var rätt
+		//
+		SucceGissaEttTalSpelVy meddelande = new SucceGissaEttTalSpelVy();
+		meddelande.Hemligheten = enSpelomgång.Hemligheten;
+		meddelande.AntalNuvarandeGissningar = enSpelomgång.AntalNuvarandeGissningar;
 
-	    var cookie = Request.Cookies[".fakirenstenstorp.st"];
-	    var cookieStr = cookie.ToString();
+		return Lycka( meddelande);
+	    }
 
-	    Console.WriteLine( "Game: POST: " + cookie.ToString());
-	    // var useragent = Request.UserAgent;
-	    // Console.WriteLine( "Game: POST: " + (HttpWebRequest) Request.UserAgent);
+	    GissaEttTalSpelVyModell nyChans = new GissaEttTalSpelVyModell();
+	    nyChans.AntalNuvarandeGissningar = enSpelomgång.AntalGissningar;
+	    nyChans.Hemligheten = enSpelomgång.AntalGissningar;
+	    nyChans.Tips = enSpelomgång.EttTips(enSpelomgång.AntalGissningar);
 
-	    // if ( cookie != null) {
-	    //	Console.WriteLine( "Game: POST: " + cookie);
-
-	    //	// GissaEttTalSpelModell enSpelomgång = uteståendeSpel[cookie];
-
-	    //	if ( enSpelomgång.Gissning( spelbrädan.Talgissning)) {
-	    //	    // det blev rätt
-
-	    //	    RedirectToAction( "Index", "Home");
-	    //	}
-
-	    //	spelbrädan.AntalNuvarandeGissningar = enSpelomgång.AntalGissningar;
-	    // }
-
-
-	    // HttpCookieCollection inkluderadeCookies = request.Cookies;
-
-	    // foreach (string nycklar in inkluderadeCookies.AllKeys) {
-	    //	Console.WriteLine( "Game: POST: " + nycklar);
-	    // }
-
-	    //Console.WriteLine( "Game: POST: " + HttpContext.Request.GetString(".fakirenstenstorp.st") + "---");
-
-	    return View(spelbrädan);
+	    return View(nyChans);
 	}
     }
 }

@@ -11,7 +11,8 @@ namespace Webapp.Vydata {
 	[Display(Name = "Antal tidigare gissningar på talet")]
 	public int AntalNuvarandeGissningar { get; set; }
 
-
 	public string Tips { get; set; }
+
+	public int Hemligheten { get; set; }
     }
 }

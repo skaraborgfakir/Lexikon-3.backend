@@ -1,4 +1,4 @@
-﻿<!-- Time-stamp: <2021-09-01 17:36:25 stefan> -*-web-*- -->
+﻿<!-- Time-stamp: <2021-09-02 14:52:22 stefan> -*-web-*- -->
 <!-- githubRepos.cshtml -->
 
 @using Webapp.Vydata
@@ -9,17 +9,23 @@
     ViewData["Title"] = "Gissa ett tal";
 }
 
-<h1>Spel</h1>
+<h1>gissa-ett-tal:leken</h1>
 
 <div>
     Gissa ett tal mellan 1-100
-</div>
-
-<div>
-    Fram tills nu har du gissat @Model.AntalNuvarandeGissningar gånger
 </div>
 
 <form asp-controller="GissaEttTalSpel" asp-action="Spela" method="post">
     <label for="gissning">Gissa på ett tal:</label><input asp-for="Talgissning"/><br/>
     <button type="submit">Inmatning</button>
 </form>
+
+<div>
+    Fram tills nu har du gissat @Model.AntalNuvarandeGissningar gånger
+</div>
+
+@{ if (Model.Tips != null)
+    <div>
+    Tips: @Model.Tips
+    </div>
+}

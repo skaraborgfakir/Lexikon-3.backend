@@ -1,0 +1,21 @@
+﻿<!-- Time-stamp: <2021-09-02 14:51:06 stefan> -*-web-*- -->
+<!-- githubRepos.cshtml -->
+
+@using Webapp.Vydata
+
+@model SucceGissaEttTalSpelVy
+
+@{
+    ViewData["Title"] = "Grattis-det är rätt";
+}
+
+<h1>gissa-ett-tal:leken</h1>
+
+<div>
+    Grattis, du gissade rätt. Det var @Model.Hemligheten
+    som var det hemliga talet.
+</div>
+
+<div>
+    Du gissade @Model.AntalNuvarandeGissningar gånger
+</div>
