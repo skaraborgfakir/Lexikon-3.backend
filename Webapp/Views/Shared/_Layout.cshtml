@@ -1,4 +1,4 @@
-<!DOCTYPE html> <!-- Time-stamp: <2021-09-02 17:15:52 stefan> -*-web-*- -->
+<!DOCTYPE html> <!-- Time-stamp: <2021-09-02 17:28:40 stefan> -*-web-*- -->
 <!-- _Layout.cshtml -->
 <!-- inkluderar via RenderBody() de olika fragmenten -->
 <!--     fragment ? Exv: -->
@@ -46,10 +46,10 @@
 	<footer class="footer">
 	    <div>
 		&copy; Stefan Skoglund @DateTime.Now.ToString("D")
-		<!-- https://dotnettutorials.net/lesson/asp-net-core-appsettings-json-file/ -->
-		<!-- https://stackoverflow.com/questions/47296541/access-configuration-from-a-view-in-asp-net-core/47297327 -->
 	    </div>
 	    <div>
+		<!-- https://dotnettutorials.net/lesson/asp-net-core-appsettings-json-file/ -->
+		<!-- https://stackoverflow.com/questions/47296541/access-configuration-from-a-view-in-asp-net-core/47297327 -->
 		via appsettings*.json @Configuration["app_run_miljö"]
 	    </div>
 	</footer>
