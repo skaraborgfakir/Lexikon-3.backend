@@ -1,4 +1,4 @@
-﻿// Time-stamp: <2021-08-31 13:09:02 stefan>
+﻿// Time-stamp: <2021-09-01 13:28:33 stefan>
 
 using System;
 // using System.Collections.Generic;
@@ -67,26 +67,27 @@ namespace Webapp.Controllers
 	//
 	// https://www.infoworld.com/article/3600190/how-to-overload-action-methods-in-aspnet-core-mvc-5.html
 	//
-	[HttpGet]
-	public IActionResult Game()
-	{
-	    Console.WriteLine( "Game: Get: return View(Game)");
+	// [HttpGet]
+	// public IActionResult Game()
+	// {
+	//     Console.WriteLine( "Game: Get: return View(Game)");
+	//     Game vilketSpel = new Game();
 
-	    return View("Game");
-	}
+	//     return View("Game", vilketSpel);
+	// }
 
 	//
 	// POST
 	//
 	// https://www.infoworld.com/article/3600190/how-to-overload-action-methods-in-aspnet-core-mvc-5.html
 	//
-	[HttpPost]
-	public IActionResult Game(int gissning)
-	{
-	    Console.WriteLine( "Game: Post: return View(Game)");
+	// [HttpPost]
+	// public IActionResult Game(Game vilketSpel)
+	// {
+	//     Console.WriteLine( "Game: Post: return View(Game)");
 
-	    return View("Game");
-	}
+	//     return View("Game");
+	// }
 
 	//
 	// GET: persondatasäkerhet

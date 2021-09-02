@@ -1,4 +1,4 @@
-// Time-stamp: <2021-08-31 16:28:00 stefan>
+// Time-stamp: <2021-09-01 21:37:11 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
@@ -27,7 +27,6 @@ using Microsoft.Extensions.DependencyInjection; // IServiceCollection
 
 using Microsoft.AspNetCore.Session; //
 
-
 namespace Webapp
 {
     // kan egentligen heta vad som helst exv REVELJ !
@@ -50,8 +49,8 @@ namespace Webapp
 	{
 	    services.AddDistributedMemoryCache();
 	    services.AddSession( options => {
-		options.IdleTimeout = TimeSpan.FromSeconds(30);
-		// options.Cookie.Name = ".netcore.fakirenstenstorp.st";
+// options.Cookie.Name = ".netcore.fakirenstenstorp.st";
+		options.IdleTimeout = TimeSpan.FromSeconds(40);
 		options.Cookie.HttpOnly = true;
 		options.Cookie.IsEssential = true;
 	    }
@@ -138,14 +137,17 @@ namespace Webapp
 		    pattern: "FeverCheck",
 		    defaults: new {
 						 controller="Doctor",
-						 action="FeverCheck"} );  // 127.0.0.1/FeverCheck
+						 action="FeverCheck"
+					     }
+		);  // 127.0.0.1/FeverCheck
 		endpoints.MapControllerRoute(
 		    name:    "gissa ett tal-spel",
 		    pattern: "GuessingGame",
 		    defaults: new {
-						 controller="Home",
-						 action="Game"
-					     });
+						 controller="GissaEttTalSpel",
+						 action="Spela"
+					     }
+		);
 		endpoints.MapControllerRoute(
 		    name:    "normalfall",
 		    pattern: "{controller=Home}/{action=Index}");  // 127.0.0.1/{controller ?}/{action ?}
