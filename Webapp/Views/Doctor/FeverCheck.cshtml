@@ -1,7 +1,8 @@
-﻿<!-- Time-stamp: <2021-08-31 09:29:57 stefan> -*-web-*- -->
+﻿<!-- Time-stamp: <2021-09-02 16:50:17 stefan> -*-web-*- -->
 <!-- FeverCheck.cshtml -->
 
 @using Webapp.Viewmodel
+@model Feberkontroll
 
 @{
     ViewData["Title"] = "Doctor Boströms mottagning";
@@ -13,8 +14,11 @@
     </div>
 </div>
 
-@model Feberkontroll
 <form asp-controller="Doctor" asp-action="inmatning" method="post">
     <label for="kroppstemp">Vad är din temperatur</label><input asp-for="Kroppstemp"/><br/>
     <button type="submit">Inmatning</button>
 </form>
+
+<div>
+    Testet är kalibrerat för om temperaturen mäts i hörselgången
+</div>
