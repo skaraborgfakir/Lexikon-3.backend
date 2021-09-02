@@ -6,8 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.0" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="jQuery" Version="3.6.0" />
     <PackageReference Include="Newtonsoft.JSON" Version="13.0.1" />
+    <PackageReference Include="Npgsql" Version="5.0.7" />
     <PackageReference Include="Rick.Docs.Samples.RouteInfo" Version="1.0.0.4" />
   </ItemGroup>
 
