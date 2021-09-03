@@ -1,4 +1,4 @@
-// Time-stamp: <2021-09-03 11:48:52 stefan>
+// Time-stamp: <2021-09-03 13:26:24 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
@@ -154,7 +154,12 @@ namespace Webapp
 						 controller="Doctor",
 						 action="FeverCheck"
 					     }
-		);  // 127.0.0.1/FeverCheck
+		);
+
+		//
+		// code requirements:
+		//   1  The guessing game View should be accessible through a custom route, using the
+		//       “/GuessingGame” pattern, regardless of what the controller is named.
 		//
 		// beroende av UseSession
 		endpoints.MapControllerRoute(

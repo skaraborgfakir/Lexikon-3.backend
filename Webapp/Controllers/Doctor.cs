@@ -1,4 +1,4 @@
-// Time-stamp: <2021-09-03 11:54:11 stefan>
+// Time-stamp: <2021-09-03 12:07:44 stefan>
 
 using System;
 // using System.Collections.Generic;
@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 using Webapp.Modeller;
-using Webapp.Viewmodel;
+using Webapp.Vydata;
 
 namespace Webapp.Controllers
 {
