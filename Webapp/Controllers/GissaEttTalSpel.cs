@@ -1,4 +1,4 @@
-// Time-stamp: <2021-09-03 21:01:40 stefan>
+// Time-stamp: <2021-09-03 21:21:14 stefan>
 
 using System;
 // using System.Collections.Generic;
@@ -101,6 +101,7 @@ namespace Webapp.Controllers
 	    Console.WriteLine( "Game: GET: HttpContext.Session.SetString()");
 	    _logger.LogInformation( "Game: GET: HttpContext.Session.SetString()");
 	    HttpContext.Session.SetInt32( "hemligheten.gissatal.netcore3.1.fakirenstenstorp.st", enSpelomgång.Hemligheten);
+	    HttpContext.Session.SetInt32( "antalgissningar.gissatal.netcore3.1.fakirenstenstorp.st", enSpelomgång.AntalGissningar);
 	    HttpContext.Session.SetString( "spelomgång.gissatal.netcore3.1.fakirenstenstorp.st", JsonConvert.SerializeObject(enSpelomgång));
 
 	    Console.WriteLine( "Game: GET: HttpContext.Session.GetString + " + HttpContext.Session.GetString( "spelomgång.gissatal.netcore3.1.fakirenstenstorp.st"));
@@ -141,8 +142,12 @@ namespace Webapp.Controllers
 	    Console.WriteLine( "Game: POST 1-2: JsonConvert.SerializeObject(spelbrädan " + JsonConvert.SerializeObject(spelbrädan));
 	    Console.WriteLine( "Game: POST 1-3: HttpContext.Session.GetString " + HttpContext.Session.GetString( "spelomgång.gissatal.netcore3.1.fakirenstenstorp.st"));
 
-	    GissaEttTalSpelModell enSpelomgång = JsonConvert.DeserializeObject<GissaEttTalSpelModell>(HttpContext.Session.GetString( "spelomgång.gissatal.netcore3.1.fakirenstenstorp.st"));
+	    // GissaEttTalSpelModell enSpelomgång = JsonConvert.DeserializeObject<GissaEttTalSpelModell>(HttpContext.Session.GetString( "spelomgång.gissatal.netcore3.1.fakirenstenstorp.st"));
 	    int hemligheten = (int) HttpContext.Session.GetInt32( "hemligheten.gissatal.netcore3.1.fakirenstenstorp.st");
+
+	    GissaEttTalSpelModell enSpelomgång = new GissaEttTalSpelModell( (int) HttpContext.Session.GetInt32( "hemligheten.gissatal.netcore3.1.fakirenstenstorp.st"),
+									    (int) HttpContext.Session.GetInt32( "antalgissningar.gissatal.netcore3.1.fakirenstenstorp.st"));
+
 	    Console.WriteLine( "Game: POST 1-5: int hemligheten = (int) HttpContext.Session "+ hemligheten.ToString());
 
 	    if (enSpelomgång.Gissning(spelbrädan.Talgissning)) {
@@ -150,6 +155,7 @@ namespace Webapp.Controllers
 		// det var rätt
 		//
 		Console.WriteLine( "Game: POST 2-1: det var rätt");
+
 		SucceGissaEttTalSpelVy meddelande = new SucceGissaEttTalSpelVy();
 		meddelande.Hemligheten = enSpelomgång.Hemligheten;
 		meddelande.AntalNuvarandeGissningar = enSpelomgång.AntalGissningar;
@@ -162,6 +168,7 @@ namespace Webapp.Controllers
 	    nyChans.Tips = enSpelomgång.EttTips(spelbrädan.Talgissning);
 
 	    HttpContext.Session.SetString( "spelomgång.gissatal.netcore3.1.fakirenstenstorp.st", JsonConvert.SerializeObject(enSpelomgång));
+	    HttpContext.Session.SetInt32( "antalgissningar.gissatal.netcore3.1.fakirenstenstorp.st", enSpelomgång.AntalGissningar);
 	    Console.WriteLine( "Game: POST 3-1: JsonConvert.SerializeObject(enSpelomgång " + JsonConvert.SerializeObject(enSpelomgång));
 	    Console.WriteLine( "Game: POST 3-2: HttpContext.Session.GetString " + HttpContext.Session.GetString( "spelomgång.gissatal.netcore3.1.fakirenstenstorp.st"));
 
