@@ -1,4 +1,4 @@
-// Time-stamp: <2021-09-01 21:37:11 stefan>
+// Time-stamp: <2021-09-03 11:34:59 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
@@ -48,8 +48,20 @@ namespace Webapp
 	public void ConfigureServices(IServiceCollection services)
 	{
 	    services.AddDistributedMemoryCache();
+
+	    //
+	    // GDPR:anpassningar i .net innebar att det inte längre automatiskt
+	    // i laissez-faire anda går att som programmerare förvänta sig att användaren
+	    // kan tvingas att acceptera cookies. Därför är som standard session-kakan (och alla andra
+	    // kakor) blockerade
+	    //
+	    // options.Cookie.IsEssential tar bort blockeringen för session-kakan och enbart den !
+	    //
+	    // https://andrewlock.net/session-state-gdpr-and-non-essential-cookies/
+
 	    services.AddSession( options => {
-// options.Cookie.Name = ".netcore.fakirenstenstorp.st";
+// options.Cookie.Name = "gissaetttal.netcore.fakirenstenstorp.st";
+		options.Cookie.Name = Configuration["session_kakans_namn"];
 		options.IdleTimeout = TimeSpan.FromSeconds(40);
 		options.Cookie.HttpOnly = true;
 		options.Cookie.IsEssential = true;
