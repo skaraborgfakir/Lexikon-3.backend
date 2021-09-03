@@ -1,4 +1,4 @@
-// Time-stamp: <2021-09-03 11:38:30 stefan>
+// Time-stamp: <2021-09-03 11:48:52 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
@@ -32,6 +32,7 @@ namespace Webapp
     // kan egentligen heta vad som helst exv REVELJ !
     public class REVELJ
     {
+	//
 	private IConfiguration _configuration;
 	public REVELJ(IConfiguration configuration)
 	{
@@ -42,9 +43,9 @@ namespace Webapp
 	    get { return _configuration; }
 	}
 
-	// This method gets called by the runtime. Use this method to add services to the container.
-	// For more information on how to configure your
-	// application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+	//
+	// https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-3.1
+	//
 	public void ConfigureServices(IServiceCollection services)
 	{
 	    services.AddDistributedMemoryCache();
@@ -58,7 +59,7 @@ namespace Webapp
 	    // options.Cookie.IsEssential tar bort blockeringen för session-kakan och enbart den !
 	    //
 	    // https://andrewlock.net/session-state-gdpr-and-non-essential-cookies/
-
+	    //
 	    services.AddSession( options => {
 		options.Cookie.Name = Configuration["session_kakans_namn"];
 		options.IdleTimeout = TimeSpan.FromSeconds(40);
@@ -71,8 +72,8 @@ namespace Webapp
 	    services.AddMvc();
 	}
 
-	// This method gets called by the runtime. Use this method to configure the HTTP
-	// request pipeline.
+	//
+	//
 	public void Configure( IApplicationBuilder app,
 			       IWebHostEnvironment env)
 	{
@@ -103,13 +104,16 @@ namespace Webapp
 	    app.UseRouting();
 
 	    //
+	    // sessions-kakan - det här anropet måste vara placerad för de moduler (exv aktion-metoder)
+	    // som ska ha tillgång till kakan.
+	    //
 	    app.UseSession();
 
 	    //
-	    // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-5.0
+	    // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-3.1
 	    //
-	    // avgrening till olika styrprogram (Controller) - ingen egentlig återuppsamling efter dessa
-	    // så inte en egentlig gaffling
+	    // avgrening till olika styrprogram (Controller) - ingen egentlig återuppsamling efter
+	    // dessa så inte en egentlig gaffling
 	    //
 	    // beroende av UseRouting() !
 	    //
@@ -151,6 +155,8 @@ namespace Webapp
 						 action="FeverCheck"
 					     }
 		);  // 127.0.0.1/FeverCheck
+		//
+		// beroende av UseSession
 		endpoints.MapControllerRoute(
 		    name:    "gissa ett tal-spel",
 		    pattern: "GuessingGame",
