@@ -1,4 +1,4 @@
-// Time-stamp: <2021-09-03 11:34:59 stefan>
+// Time-stamp: <2021-09-03 11:38:30 stefan>
 
 using System;
 // https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic?view=netcore-3.1
@@ -60,7 +60,6 @@ namespace Webapp
 	    // https://andrewlock.net/session-state-gdpr-and-non-essential-cookies/
 
 	    services.AddSession( options => {
-// options.Cookie.Name = "gissaetttal.netcore.fakirenstenstorp.st";
 		options.Cookie.Name = Configuration["session_kakans_namn"];
 		options.IdleTimeout = TimeSpan.FromSeconds(40);
 		options.Cookie.HttpOnly = true;
