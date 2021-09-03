@@ -9,7 +9,7 @@ namespace Webapp.Modeller {
 
 	public GissaEttTalSpelModell() {
 	    antalGissningar = 0;
-	    ettSlumpTal = Slumptalskälla.tal( 1, 100);
+	    hemligheten = Slumptalskälla.tal( 1, 100);
 	}
 	public GissaEttTalSpelModell( int _hemligheten,
 				      int _antalGissningar) {
