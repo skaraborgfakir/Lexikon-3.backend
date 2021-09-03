@@ -1,12 +1,15 @@
-<!DOCTYPE html> <!-- Time-stamp: <2021-09-03 09:27:12 stefan> -*-web-*- -->
+<!DOCTYPE html> <!-- Time-stamp: <2021-09-03 10:08:58 stefan> -*-web-*- -->
 <!-- _Layout.cshtml -->
 <!-- inkluderar via RenderBody() de olika fragmenten -->
-<!--     fragment ? Exv: -->
-<!--    Views/_ViewStart.cshtml (ett fragment) innan
-<!--         Views/Hem/OmMig.cshtml (ett annat) -->
+<!--   fragment ? Exv: -->
+<!--     Views/_ViewStart.cshtml (ett fragment) -->
+<!--     Views/Hem/OmMig.cshtml (ett annat) -->
+<!--     Views/Hem/OmMig.cshtml (ett annat) -->
 
 <!-- https://dotnettutorials.net/lesson/asp-net-core-appsettings-json-file/ -->
 <!-- https://stackoverflow.com/questions/47296541/access-configuration-from-a-view-in-asp-net-core/47297327 -->
+
+<!-- // via appsettings*.json i foot -->
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
 
