@@ -1,3 +1,6 @@
+// Time-stamp: <2021-09-03 11:57:17 stefan>
+//
+
 using System;
 
 namespace Webapp.Hjälpklasser {
