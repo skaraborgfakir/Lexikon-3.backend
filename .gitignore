@@ -452,3 +452,10 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+##
+## LateX
+##
+doktor_bostrom_sequence_diagram.aux
+doktor_bostrom_sequence_diagram.log
+doktor_bostrom_sequence_diagram.pdf
